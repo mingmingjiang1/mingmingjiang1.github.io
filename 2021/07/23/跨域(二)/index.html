@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>跨域（二） | LifeLrving!</title><meta name="keywords" content="网络"><meta name="author" content="MmJiang"><meta name="copyright" content="MmJiang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Cross-origin requests( CORS) 跨域资源共享是一种机制，该机制使用附加的HTPP头部告诉浏览器，准许运行一个在源上的Web应用访问位与另一不同源选定的资源。当一个Web应用发起一个与自身所在源(协议, 域，端口)不同的HTTP请求，它发起的即跨源HTTP请求。 但是处于安全性，浏览器限制脚本内发起的跨源HTTP请求。如XMLHttpRequest和Fetch API都遵循">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域（二）">
+<meta property="og:url" content="https://mingmingjiang1.github.io/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%BA%8C)/index.html">
+<meta property="og:site_name" content="LifeLrving!">
+<meta property="og:description" content="Cross-origin requests( CORS) 跨域资源共享是一种机制，该机制使用附加的HTPP头部告诉浏览器，准许运行一个在源上的Web应用访问位与另一不同源选定的资源。当一个Web应用发起一个与自身所在源(协议, 域，端口)不同的HTTP请求，它发起的即跨源HTTP请求。 但是处于安全性，浏览器限制脚本内发起的跨源HTTP请求。如XMLHttpRequest和Fetch API都遵循">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg">
+<meta property="article:published_time" content="2021-07-22T19:13:53.000Z">
+<meta property="article:modified_time" content="2021-07-22T11:14:47.392Z">
+<meta property="article:author" content="MmJiang">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://mingmingjiang1.github.io/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%BA%8C)/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '跨域（二）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-07-22 11:14:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/atvar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">LifeLrving!</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">跨域（二）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-07-22T19:13:53.000Z" title="Created 2021-07-22 19:13:53">2021-07-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-07-22T11:14:47.392Z" title="Updated 2021-07-22 11:14:47">2021-07-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="跨域（二）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Cross-origin requests( CORS) 跨域资源共享是一种机制，该机制使用附加的HTPP头部告诉浏览器，准许运行一个在源上的Web应用访问位与另一不同源选定的资源。当一个Web应用发起一个与自身所在源(协议, 域，端口)不同的HTTP请求，它发起的即跨源HTTP请求。</p>
+<p>但是处于安全性，浏览器限制脚本内发起的跨源HTTP请求。如XMLHttpRequest和Fetch API都遵循API同源策略。这就意味着使用这些API的Web应用程序只能从加载应用程序的同一个域请求HTTP资源，除非响应报文设置了某些CORS响应头。</p>
+<p>如何通过设置HTTP头部来CROS呢？（以下的设置仅限于http1.0）</p>
+<p>跨源资源共享标准新增了一组 HTTP 首部字段，允许服务器声明哪些源站通过浏览器有权限访问哪些资源。另外，规范要求，对那些可能对服务器数据产生副作用的 HTTP 请求方法（特别是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/GET"><code>GET</code></a> 以外的 HTTP 请求，或者搭配某些 MIME 类型的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/POST"><code>POST</code></a> 请求），浏览器必须首先使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/OPTIONS"><code>OPTIONS</code></a> 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨源请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies">Cookies </a>和 HTTP 认证相关数据）</p>
+<p>常见的使用http头部设置来进行CROS的场景：</p>
+<ol>
+<li><p>简单请求，methods是GET,POST,HEAD这样的方法，而content-type是以下三个类型之一：</p>
+<ul>
+<li>texte/plain</li>
+<li>multipart/form-data</li>
+<li>application/x-www-form-urlencoded</li>
+</ul>
+<p>出来上述的要求，还有其他的一些要求，这里不再叙述</p>
+<p>对于简单请求，如果希望跨域访问，可以在响应头中设置：</p>
+<p>Access-Control-Allow-Origin: <a target="_blank" rel="noopener" href="http://foo.example/">http://foo.example</a></p>
+<p>表明该响应头仅仅针对<a href="http://foo.example发出的请求才做出回应，所以在请求头的origin必须要设置：http://foo.example，类似的">http://foo.example发出的请求才做出回应，所以在请求头的origin必须要设置：http://foo.example，类似的</a></p>
+<p>Access-Control-Allow-Origin: *</p>
+<p>它可以对任何请求源做出跨域响应</p>
+</li>
+<li><p>附带cookie的请求</p>
+<p>一般而言，对于跨源 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest"><code>XMLHttpRequest</code></a> 或 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch</a> 请求，浏览器<strong>不会</strong>发送身份凭证信息。如果要发送凭证信息，需要设置 <code>XMLHttpRequest </code>的某个特殊标志位。</p>
+<p>与简单请求不同的是，必须在响应头中额外附加一个参数：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials"><code>Access-Control-Allow-Credentials</code></a><code>: true</code></p>
+<p>同时，请求头中也必须有一个表明携带了身份验证的参数</p>
+<p><code>withCredentials = true</code>，</p>
+</li>
+<li><p>预检请求</p>
+<p>与前述简单请求不同，“需预检的请求”要求必须首先使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/OPTIONS"><code>OPTIONS</code></a>  方法发起一个预检请求到服务器，以获知服务器是否允许该实际请求。”预检请求“的使用，可以避免跨域请求对服务器的用户数据产生未预期的影响，预检请求可以设置一个参数<code>Access-Control-Allow-Age:</code>表明当前预检请求最大的生命时间，在这段时间内，发送实际请求，不会再次发送预检请求。</p>
+</li>
+</ol>
+<p>在vue的使用过程中，我们一般都是使用vue的开发服务器运行程序，当我们在浏览器中请求该服务器时，相当于是从客户端-&gt;localhost服务器的一个请求，这是允许的；但是如果直接通过浏览器去请求跨域的数据，这是不可取的，这个时候必须把localhost当作中间的一个代理，把所有有关跨域的请求都委托给代理，比如：我想从服务器获取http:bilibili/api/list的数据，但是直接使用该api是跨域的，这个时候可以委托给代理，同时不要直接发送该请求获取数据：/api/list,然后在配置文件中设置代理：</p>
+<p>proxy: {</p>
+<p>​    “/api”: target: “http:bilibili/api/list”</p>
+<p>}</p>
+<p>这样在浏览器发送的请求就不含跨域名的了，而且会委托给代理发送跨域请求，但是这样有个缺点，只能在开发模式下，使用该方法，因为配置文件本身并不会打包到最终的文件。那为什么代理可以跨域呢？</p>
+<p>网友1的回答：同源策略是浏览器的安全策略，不是HTTP协议的一部分。</p>
+<p>服务器端调用HTTP接口只是使用HTTP协议，不会执行JS脚本，不需要同源策略，也就没有跨越问题；</p>
+<p>网友2的回答：为什么会有跨域，那是浏览器的安全策略，没了浏览器就没有跨域了</p>
+<p><strong>参考连接:</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangfengshi/p/13921093.html">Access-Control-Allow-Headers等基础常识 - 盗帅_tim - 博客园 (cnblogs.com)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">MmJiang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://mingmingjiang1.github.io/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%BA%8C)/">https://mingmingjiang1.github.io/2021/07/23/跨域(二)/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></div><div class="post_share"><div class="social-share" data-image="https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%B8%80)/"><img class="prev-cover" src="https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">跨域（一）</div></div></a></div><div class="next-post pull-right"><a href="/2021/07/23/%E6%89%93%E9%80%9A%E5%89%8D%E5%90%8E%E7%AB%AF/"><img class="next-cover" src="https://wallroom.io/img/1920x1200/thumb/bg-299c7aa.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">全栈小知识</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/07/23/tcp/" title="TCP"><img class="cover" src="https://wallroom.io/img/1920x1080/thumb/bg-f87ceaa.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-22</div><div class="title">TCP</div></div></a></div><div><a href="/2021/07/23/跨域(一)/" title="跨域（一）"><img class="cover" src="https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-22</div><div class="title">跨域（一）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/atvar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MmJiang</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">但愿老死花酒间，不愿鞠躬车马前</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/23/%E5%A4%8D%E4%B9%A0/" title="Vue组件使用心得"><img src="https://wallroom.io/img/3840x1080/thumb/bg-4f9e296.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue组件使用心得"/></a><div class="content"><a class="title" href="/2021/07/23/%E5%A4%8D%E4%B9%A0/" title="Vue组件使用心得">Vue组件使用心得</a><time datetime="2021-07-22T19:13:53.000Z" title="Created 2021-07-22 19:13:53">2021-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/23/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/" title="浏览器渲染过程"><img src="https://wallroom.io/img/3840x2160/thumb/bg-20bb43a.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浏览器渲染过程"/></a><div class="content"><a class="title" href="/2021/07/23/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/" title="浏览器渲染过程">浏览器渲染过程</a><time datetime="2021-07-22T19:13:53.000Z" title="Created 2021-07-22 19:13:53">2021-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%B8%80)/" title="跨域（一）"><img src="https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="跨域（一）"/></a><div class="content"><a class="title" href="/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%B8%80)/" title="跨域（一）">跨域（一）</a><time datetime="2021-07-22T19:13:53.000Z" title="Created 2021-07-22 19:13:53">2021-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%BA%8C)/" title="跨域（二）"><img src="https://wallroom.io/img/2880x1620/thumb/bg-c1df6e5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="跨域（二）"/></a><div class="content"><a class="title" href="/2021/07/23/%E8%B7%A8%E5%9F%9F(%E4%BA%8C)/" title="跨域（二）">跨域（二）</a><time datetime="2021-07-22T19:13:53.000Z" title="Created 2021-07-22 19:13:53">2021-07-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/23/%E6%89%93%E9%80%9A%E5%89%8D%E5%90%8E%E7%AB%AF/" title="全栈小知识"><img src="https://wallroom.io/img/1920x1200/thumb/bg-299c7aa.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="全栈小知识"/></a><div class="content"><a class="title" href="/2021/07/23/%E6%89%93%E9%80%9A%E5%89%8D%E5%90%8E%E7%AB%AF/" title="全栈小知识">全栈小知识</a><time datetime="2021-07-22T19:08:27.000Z" title="Created 2021-07-22 19:08:27">2021-07-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By MmJiang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
